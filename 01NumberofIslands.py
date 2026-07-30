@@ -19,31 +19,32 @@
 
 
 # Let's count the number of island in a 2D grid using DFS
-if not grid:
-    return 0
+def numIslands(grid):
+    if not grid:
+        return 0
 
-# Rows : Top Level items are directly in the grid
-# Columns : We need to look iside one of the rows to see how many individual cells it contains
-rows, cols = len(grid), len(grid[0])
+    # Rows : Top Level items are directly in the grid
+    # Columns : We need to look iside one of the rows to see how many individual cells it contains
+    rows, cols = len(grid), len(grid[0])
 
-island_count = 0
+    island_count = 0
 
-# Helper function to perform DFS and mark visited lands
-def dfs(r,c):
-    # Base Cases : Out of Bounds of Water
-    # Checks if the current cell coordinate (r,c) is out of grid boundaries OR
-    # is water ('0'), meaning the search should stop and turn back.
-    if r < 0 or r >= rows or c < 0 or c >= cols or grid[r][c] == '0':
-        return 0 
+    # Helper function to perform DFS and mark visited lands
+    def dfs(r,c):
+        # Base Cases : Out of Bounds of Water
+        # Checks if the current cell coordinate (r,c) is out of grid boundaries OR
+        # is water ('0'), meaning the search should stop and turn back.
+        if r < 0 or r >= rows or c < 0 or c >= cols or grid[r][c] == '0':
+            return
     
-    # Mark current cell as visited by setting it to '0'
-    grid[r][c] = '0'
+        # Mark current cell as visited by setting it to '0'
+        grid[r][c] = '0'
     
-    # Explore all 4 directions (up,down,left and right)
-    dfs(r+1,c) # Down (moves the next row down)
-    dfs(r-1,c) # Up (moves to the previous row up)
-    dfs(r,c+1) # Right (moves to the next column right)
-    dfs(r,c-1) # Left (moves to the previous column left)
+        # Explore all 4 directions (up,down,left and right)
+        dfs(r+1,c) # Down (moves the next row down)
+        dfs(r-1,c) # Up (moves to the previous row up)
+        dfs(r,c+1) # Right (moves to the next column right)
+        dfs(r,c-1) # Left (moves to the previous column left)
     
     # Iterate over each cell in the grid
     for r in range(rows):
@@ -54,6 +55,27 @@ def dfs(r,c):
     
     return island_count
 
+# Test Case 1: Grid with 1 island
+test_grid_1 = [
+  ["1","1","1","1","0"],
+  ["1","1","0","1","0"],
+  ["1","1","0","0","0"],
+  ["0","0","0","0","0"]
+]
+
+print("Islands in Grid 1:", numIslands(test_grid_1))
+# Expected Output: 1
+
+
+# Test Case 2: Grid with 3 islands
+test_grid_2 = [
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
+]
+
+print("Islands in Grid 2:", numIslands(test_grid_2))
 
 # Time Complexity = O(m * n)
 # Space Complexity = O(h)
