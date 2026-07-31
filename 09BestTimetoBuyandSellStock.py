@@ -69,3 +69,6 @@ print("Test Case 3 Output:", res3)
 prices4 = [3,2,6,1,4]
 res4 = sol.maxProfit(prices4)
 print('Test Case 4 Output:', res4)
+
+# Time Complexity : O(n) Single Pass through prices of length n
+# Space Complexity : O(1) Constant extra space for variables
